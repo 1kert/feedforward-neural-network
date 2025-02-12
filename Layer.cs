@@ -1,3 +1,4 @@
+using System.Runtime.ExceptionServices;
 using System.Text;
 
 namespace feedforward_neural_network;
@@ -40,5 +41,22 @@ public class Layer
         }
         sb.Append(']');
         return sb.ToString();
+    }
+    
+    public double[] CalculateOutputs(double[] activations)
+    {
+        int nodes = biases.Length;
+        int weightAmount = activations.Length;
+        double[] outputs = new double[nodes];
+        for(int node = 0; node < nodes; node++)
+        {
+            outputs[node] = biases[node];
+            double[] nodeWeights = weights[node];
+            for (int weight = 0; weight < weightAmount; weight++)
+            {
+                outputs[node] += nodeWeights[weight] * activations[weight];
+            }
+        }
+        return outputs;
     }
 }

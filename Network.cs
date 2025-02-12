@@ -18,4 +18,14 @@ public class Network
             Console.WriteLine(layer);
         }
     }
+    
+    public double[] CalculateOutputs(double[] inputs)
+    {
+        double[] output = inputs;
+
+        foreach(Layer layer in layers)
+            output = layer.CalculateOutputs(output);
+        
+        return output;
+    }
 }
