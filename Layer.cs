@@ -33,11 +33,11 @@ public class Layer
             sb.Append('[');
             for (int input = 0; input < weights[node].Length; input++)
             {
-                sb.Append(weights[node][input]);
+                sb.Append(Math.Round(weights[node][input], 4));
                 if (input != weights[node].Length - 1) sb.Append(", ");
             }
             sb.Append("], ");
-            if (node == biases.Length - 1) sb.Append(biases[node]);
+            if (node == biases.Length - 1) sb.Append(Math.Round(biases[node], 4));
         }
         sb.Append(']');
         return sb.ToString();
