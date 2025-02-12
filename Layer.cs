@@ -1,4 +1,3 @@
-using System.Runtime.ExceptionServices;
 using System.Text;
 
 namespace feedforward_neural_network;
@@ -7,12 +6,16 @@ public class Layer
 {
     readonly double[][] weights;
     readonly double[] biases;
+    readonly double[] activations;
+    readonly double[] nodeValues;
     
     public Layer(int layerSize, int inputAmount)
     {
         Random rand = new();
         weights = new double[layerSize][];
         biases = new double[layerSize];
+        activations = new double[layerSize];
+        nodeValues = new double[layerSize];
         double range = 1 / Math.Sqrt(inputAmount);
         
         for (int i = 0; i < layerSize; i++)
@@ -43,6 +46,11 @@ public class Layer
         return sb.ToString();
     }
     
+    double Activation(double n)
+    {
+        return n; // todo: implement
+    }
+    
     public double[] CalculateOutputs(double[] activations)
     {
         int nodes = biases.Length;
@@ -56,6 +64,8 @@ public class Layer
             {
                 outputs[node] += nodeWeights[weight] * activations[weight];
             }
+            outputs[node] = Activation(outputs[node]);
+            activations[node] = outputs[node];
         }
         return outputs;
     }
