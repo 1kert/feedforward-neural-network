@@ -28,4 +28,22 @@ public class Network
         
         return output;
     }
+    
+    static double Cost(double actual, double expected)
+    {
+        return Math.Pow(actual - expected, 2);
+    }
+    
+    static double Cost(double[] actual, double[] expected)
+    {
+        double cost = 0;
+        for(int i = 0; i < actual.Length; i++) cost += Cost(actual[i], expected[i]);
+        return cost;
+    }
+    
+    public double CalculateCost(DataPoint dataPoints)
+    {
+        double[] outputs = CalculateOutputs(dataPoints.Inputs);
+        return Cost(outputs, dataPoints.Expected);
+    }
 }
