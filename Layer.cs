@@ -6,7 +6,7 @@ public class Layer
 {
     readonly double[][] weights;
     readonly double[] biases;
-    readonly double[] activations;
+    readonly double[] sums;
     readonly double[] nodeValues;
     
     public Layer(int layerSize, int inputAmount)
@@ -14,7 +14,7 @@ public class Layer
         Random rand = new();
         weights = new double[layerSize][];
         biases = new double[layerSize];
-        activations = new double[layerSize];
+        sums = new double[layerSize];
         nodeValues = new double[layerSize];
         double range = 1 / Math.Sqrt(inputAmount);
         
@@ -46,9 +46,14 @@ public class Layer
         return sb.ToString();
     }
     
-    double Activation(double n)
+    static double Activation(double n)
     {
-        return n; // todo: implement
+        return n >= 0 ? n : 0.01 * n;
+    }
+    
+    static double ActivationDerivative(double n)
+    {
+        return n >= 0 ? 1 : 0.01;
     }
     
     public double[] CalculateOutputs(double[] activations)
@@ -64,8 +69,8 @@ public class Layer
             {
                 outputs[node] += nodeWeights[weight] * activations[weight];
             }
+            sums[node] = outputs[node];
             outputs[node] = Activation(outputs[node]);
-            activations[node] = outputs[node];
         }
         return outputs;
     }
