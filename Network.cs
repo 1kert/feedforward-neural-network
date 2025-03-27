@@ -2,18 +2,18 @@ namespace feedforward_neural_network;
 
 public class Network
 {
-    readonly Layer[] layers;
+    private readonly Layer[] _layers;
 
     public Network(params int[] layerSizes)
     {
-        layers = new Layer[layerSizes.Length - 1];
+        _layers = new Layer[layerSizes.Length - 1];
         for (int i = 1; i < layerSizes.Length; i++)
-            layers[i - 1] = new(layerSizes[i], layerSizes[i - 1]);
+            _layers[i - 1] = new Layer(layerSizes[i], layerSizes[i - 1]);
     }
     
     public void PrintLayers()
     {
-        foreach(Layer layer in layers)
+        foreach(Layer layer in _layers)
         {
             Console.WriteLine(layer);
         }
@@ -23,27 +23,41 @@ public class Network
     {
         double[] output = inputs;
 
-        foreach(Layer layer in layers)
+        foreach(Layer layer in _layers)
             output = layer.CalculateOutputs(output);
         
         return output;
     }
     
-    static double Cost(double actual, double expected)
+    private static double Cost(double actual, double expected)
     {
         return Math.Pow(actual - expected, 2);
     }
     
-    static double Cost(double[] actual, double[] expected)
+    private static double Cost(double[] actual, double[] expected)
     {
         double cost = 0;
         for(int i = 0; i < actual.Length; i++) cost += Cost(actual[i], expected[i]);
         return cost;
     }
     
-    public double CalculateCost(DataPoint dataPoints)
+    public double CalculateCost(DataPoint dataPoint)
     {
-        double[] outputs = CalculateOutputs(dataPoints.Inputs);
-        return Cost(outputs, dataPoints.Expected);
+        double[] outputs = CalculateOutputs(dataPoint.Inputs);
+        return Cost(outputs, dataPoint.Expected);
+    }
+    
+    public void CalculateGradients(DataPoint dataPoint)
+    {
+        double[] outputs = CalculateOutputs(dataPoint.Inputs);
+        double[] expected  = dataPoint.Expected;
+        int layerCount = _layers.Length;
+        
+        Layer outputLayer = _layers[^1];
+        outputLayer.CalculateOutputNodeValues(expected, outputs);
+        for (int layer = _layers.Length - 1; layer >= 0; layer--)
+        {
+            
+        }
     }
 }
