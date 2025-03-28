@@ -1,24 +1,53 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.5.2.0
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "feedforward-neural-network", "feedforward-neural-network.csproj", "{81318D93-9C21-E076-FC98-A3354680BD00}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "network", "network", "{9D4504F6-C258-95D7-6D4D-E8C508D09056}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "feedforward-neural-network", "network\feedforward-neural-network.csproj", "{F5208FA3-8AEB-461F-978F-53C14180E107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFramework", "TestFramework\TestFramework.csproj", "{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{81318D93-9C21-E076-FC98-A3354680BD00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81318D93-9C21-E076-FC98-A3354680BD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81318D93-9C21-E076-FC98-A3354680BD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81318D93-9C21-E076-FC98-A3354680BD00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5208FA3-8AEB-461F-978F-53C14180E107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5208FA3-8AEB-461F-978F-53C14180E107}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5208FA3-8AEB-461F-978F-53C14180E107}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F5208FA3-8AEB-461F-978F-53C14180E107}.Debug|x64.Build.0 = Debug|Any CPU
+		{F5208FA3-8AEB-461F-978F-53C14180E107}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F5208FA3-8AEB-461F-978F-53C14180E107}.Debug|x86.Build.0 = Debug|Any CPU
+		{F5208FA3-8AEB-461F-978F-53C14180E107}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5208FA3-8AEB-461F-978F-53C14180E107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5208FA3-8AEB-461F-978F-53C14180E107}.Release|x64.ActiveCfg = Release|Any CPU
+		{F5208FA3-8AEB-461F-978F-53C14180E107}.Release|x64.Build.0 = Release|Any CPU
+		{F5208FA3-8AEB-461F-978F-53C14180E107}.Release|x86.ActiveCfg = Release|Any CPU
+		{F5208FA3-8AEB-461F-978F-53C14180E107}.Release|x86.Build.0 = Release|Any CPU
+		{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}.Debug|x64.Build.0 = Debug|Any CPU
+		{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}.Debug|x86.Build.0 = Debug|Any CPU
+		{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}.Release|x64.ActiveCfg = Release|Any CPU
+		{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}.Release|x64.Build.0 = Release|Any CPU
+		{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}.Release|x86.ActiveCfg = Release|Any CPU
+		{F0DA720C-7A0D-482C-BD66-A6FDBC77618C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {026912FF-9C3B-4A2F-8C69-D472DD7B4D87}
+	GlobalSection(NestedProjects) = preSolution
+		{F5208FA3-8AEB-461F-978F-53C14180E107} = {9D4504F6-C258-95D7-6D4D-E8C508D09056}
 	EndGlobalSection
 EndGlobal
