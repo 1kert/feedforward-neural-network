@@ -10,4 +10,17 @@ public class Network
         for (int i = 1; i < layers.Length; i++)
             _layers[i - 1] = new Layer(layers[i - 1], layers[i]);
     }
+
+    public double[] Evaluate(double[] inputs)
+    {
+        if (inputs.Length != _layers[0].Length) throw new ArgumentException("Input lengths don't match");
+
+        double[] outputs = inputs;
+        foreach (Layer layer in _layers)
+        {
+            outputs = layer.Evaluate(inputs);
+        }
+        
+        return outputs;
+    }
 }
