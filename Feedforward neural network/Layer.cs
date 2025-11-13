@@ -27,13 +27,13 @@ public class Layer
 
     public double[] Evaluate(double[] inputs)
     {
-        if (inputs.Length != _weights[0].Length) throw new ArgumentException("Input lengths don't match");
+        // if (inputs.Length != _weights[0].Length) throw new ArgumentException("Input lengths don't match");
         
         double[] sums = new double[Length];
         for (int i = 0; i < Length; i++)
         {
             sums[i] = _biases[i];
-            for (int j = 0; j < inputs.Length; j++)
+            for (int j = 0; j < _weights[i].Length; j++)
                 sums[i] += _weights[i][j] * inputs[j];
             sums[i] = SigmoidActivation(sums[i]);
         }

@@ -13,12 +13,12 @@ public class Network
 
     public double[] Evaluate(double[] inputs)
     {
-        if (inputs.Length != _layers[0].Length) throw new ArgumentException("Input lengths don't match");
+        // if (inputs.Length != _layers[0].Length) throw new ArgumentException("Input lengths don't match");
 
         double[] outputs = inputs;
         foreach (Layer layer in _layers)
         {
-            outputs = layer.Evaluate(inputs);
+            outputs = layer.Evaluate(outputs);
         }
         
         return outputs;
