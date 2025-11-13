@@ -35,7 +35,10 @@ public class Layer
             sums[i] = _biases[i];
             for (int j = 0; j < _weights[i].Length; j++)
                 sums[i] += _weights[i][j] * inputs[j];
+            
+            _sums[i] = sums[i];
             sums[i] = SigmoidActivation(sums[i]);
+            _activations[i] = sums[i];
         }
         return sums;
     }
