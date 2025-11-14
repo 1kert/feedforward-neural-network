@@ -47,4 +47,13 @@ public class Layer
     
     private static double InitializeWeight(int inputs, int outputs) => 
         Math.Sqrt(6 / (inputs + outputs)) * (2 * Random.Shared.NextDouble() - 1);
+    
+    public static double Cost(double expected, double actual) => Math.Pow(expected - actual, 2);
+
+    public static double Cost(double[] expected, double[] actual)
+    {
+        double totalCost = 0;
+        for(int i = 0; i< expected.Length; i++) totalCost += Cost(expected[i], actual[i]);
+        return totalCost;
+    }
 }
