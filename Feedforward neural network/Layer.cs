@@ -45,6 +45,8 @@ public class Layer
 
     private static double SigmoidActivation(double x) => 1 / (1 + Math.Exp(-x));
     
+    private static double SigmoidActivationDerivative(double x) => Math.Exp(-x) / (1 + Math.Exp(-x));
+    
     private static double InitializeWeight(int inputs, int outputs) => 
         Math.Sqrt(6 / (inputs + outputs)) * (2 * Random.Shared.NextDouble() - 1);
     
