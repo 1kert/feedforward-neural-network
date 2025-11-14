@@ -6,21 +6,28 @@ public class Layer
     private readonly double[] _biases;
     private readonly double[] _sums;
     private readonly double[] _activations;
+    private readonly double[][] _weightGradient;
+    private readonly double[] _biasGradient;
+    private readonly double[] _chainValues;
     
     public int Length => _weights.Length;
 
     public Layer(int inputs, int outputs)
     {
         _biases = new double[outputs];
+        _biasGradient = new double[outputs];
         _sums = new double[outputs];
         _activations = new double[outputs];
         _weights = new double[outputs][];
+        _weightGradient = new double[outputs][];
+        _chainValues = new double[outputs];
         for (int output = 0; output < outputs; output++)
         {
             _biases[output] = 0;
             _sums[output] = 0;
             _activations[output] = 0;
             _weights[output] = new double[inputs];
+            _weightGradient[output] = new double[inputs];
             for (int input = 0; input < inputs; input++) _weights[output][input] = InitializeWeight(inputs, outputs);
         }
     }
@@ -57,5 +64,31 @@ public class Layer
         double totalCost = 0;
         for(int i = 0; i< expected.Length; i++) totalCost += Cost(expected[i], actual[i]);
         return totalCost;
+    }
+    
+    public static double CostDerivative(double expected, double actual) => 2 * (expected - actual);
+
+    public void ClearGradients()
+    {
+        for (int i = 0; i < Length; i++)
+        {
+            _biasGradient[i] = 0.0;
+            for(int j = 0; j < _weights[i].Length; j++) _weights[i][j] = 0.0;
+        }
+    }
+
+    public double[] CalculateOutputChainValues(double[] expected)
+    {
+        for (int i = 0; i < Length; i++)
+            _chainValues[i] = CostDerivative(expected[i], _activations[i]) * SigmoidActivationDerivative(_sums[i]);
+        return _chainValues;
+    }
+
+    public void CalculateChainValues(double[] previousChainValues)
+    {
+        for (int i = 0; i < Length; i++)
+        {
+            
+        }
     }
 }

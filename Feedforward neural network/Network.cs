@@ -23,4 +23,18 @@ public class Network
         
         return outputs;
     }
+
+    public void Learn(Datapoint datapoint)
+    {
+        // todo: apply gradients during backpropagation
+        foreach (var layer in _layers) layer.ClearGradients();
+        
+        double[] outputs = Evaluate(datapoint.Inputs);
+        double[] chainValues = _layers[^1].CalculateOutputChainValues(datapoint.Expected);
+        for (int i = _layers.Length - 1; i >= 0; i--)
+        {
+            
+        }
+
+    }
 }
