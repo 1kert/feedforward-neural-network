@@ -111,4 +111,15 @@ public class Layer
                 _weightGradient[i][j] = _inputs[j] * chainValues[i];
         }
     }
+
+    public void ApplyGradients(double learningRate)
+    {
+        for (int i = 0; i < Length; i++)
+        {
+            _biases[i] += learningRate * _biasGradient[i];
+            
+            for (int j = 0; j < _weights[i].Length; j++)
+                _weights[i][j] += learningRate * _weightGradient[i][j];
+        }
+    }
 }

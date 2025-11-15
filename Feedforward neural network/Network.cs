@@ -24,7 +24,7 @@ public class Network
         return outputs;
     }
 
-    public void Learn(Datapoint datapoint)
+    public void Learn(Datapoint datapoint, double learningRate)
     {
         // todo: apply gradients during backpropagation?
         foreach (var layer in _layers) layer.ClearGradients();
@@ -41,6 +41,6 @@ public class Network
             currentLayer.CalculateGradients(chainValues);
         }
         
-        // todo: apply gradients
+        foreach (var layer in _layers) layer.ApplyGradients(learningRate);
     }
 }
