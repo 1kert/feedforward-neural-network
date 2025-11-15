@@ -26,15 +26,21 @@ public class Network
 
     public void Learn(Datapoint datapoint)
     {
-        // todo: apply gradients during backpropagation
+        // todo: apply gradients during backpropagation?
         foreach (var layer in _layers) layer.ClearGradients();
         
         double[] outputs = Calculate(datapoint.Inputs);
         double[] chainValues = _layers[^1].CalculateOutputChainValues(datapoint.Expected);
         for (int i = _layers.Length - 1; i >= 0; i--)
         {
-            
-        }
+            Layer currentLayer = _layers[i];
 
+            if (i != _layers.Length - 1)
+                chainValues = _layers[i + 1].CalculateNextChainValues(chainValues);
+            
+            currentLayer.CalculateGradients(chainValues);
+        }
+        
+        // todo: apply gradients
     }
 }

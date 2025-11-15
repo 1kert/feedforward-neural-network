@@ -8,7 +8,6 @@ public class Layer
     private readonly double[] _activations;
     private readonly double[][] _weightGradient;
     private readonly double[] _biasGradient;
-    private readonly double[] _chainValues;
     private double[] _inputs = [];
     
     public int Length => _weights.Length;
@@ -21,7 +20,6 @@ public class Layer
         _activations = new double[outputs];
         _weights = new double[outputs][];
         _weightGradient = new double[outputs][];
-        _chainValues = new double[outputs];
         for (int output = 0; output < outputs; output++)
         {
             _biases[output] = 0;
@@ -79,20 +77,38 @@ public class Layer
         }
     }
 
+    public double[] CalculateNextChainValues(double[] previousChainValues)
+    {
+        double[] chainValues = new double[Length];
+
+        for (int j = 0; j < _inputs.Length; j++)
+        {
+            chainValues[j] = 0;
+            
+            for (int i = 0; i < Length; i++)
+                 chainValues[j] += _weights[i][j] * previousChainValues[i];
+            
+            chainValues[j] *= SigmoidActivationDerivative(_inputs[j]);
+        }
+        
+        return chainValues;
+    }
+        
     public double[] CalculateOutputChainValues(double[] expected)
     {
+        double[] chainValues = new double[Length];
         for (int i = 0; i < Length; i++)
-            _chainValues[i] = CostDerivative(expected[i], _activations[i]) * SigmoidActivationDerivative(_sums[i]);
-        return _chainValues;
+            chainValues[i] = CostDerivative(expected[i], _activations[i]) * SigmoidActivationDerivative(_sums[i]);
+        return chainValues;
     }
 
-    public void CalculateGradients()
+    public void CalculateGradients(double[] chainValues)
     {
         for (int i = 0; i < Length; i++)
         {
-            _biasGradient[i] = _chainValues[i];
+            _biasGradient[i] = chainValues[i];
             for (int j = 0; j < _weights[i].Length; j++)
-                _weightGradient[i][j] = _inputs[j] * _chainValues[i];
+                _weightGradient[i][j] = _inputs[j] * chainValues[i];
         }
     }
 }
