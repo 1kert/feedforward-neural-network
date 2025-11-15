@@ -86,11 +86,13 @@ public class Layer
         return _chainValues;
     }
 
-    public void CalculateChainValues(double[] previousChainValues)
+    public void CalculateGradients()
     {
         for (int i = 0; i < Length; i++)
         {
-            
+            _biasGradient[i] = _chainValues[i];
+            for (int j = 0; j < _weights[i].Length; j++)
+                _weightGradient[i][j] = _inputs[j] * _chainValues[i];
         }
     }
 }
