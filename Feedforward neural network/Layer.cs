@@ -9,6 +9,7 @@ public class Layer
     private readonly double[][] _weightGradient;
     private readonly double[] _biasGradient;
     private readonly double[] _chainValues;
+    private double[] _inputs = [];
     
     public int Length => _weights.Length;
 
@@ -36,6 +37,7 @@ public class Layer
     {
         // if (inputs.Length != _weights[0].Length) throw new ArgumentException("Input lengths don't match");
         
+        _inputs = inputs;
         double[] sums = new double[Length];
         for (int i = 0; i < Length; i++)
         {
