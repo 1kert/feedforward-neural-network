@@ -32,7 +32,7 @@ public class Layer
         }
     }
 
-    public double[] Evaluate(double[] inputs)
+    public double[] Calculate(double[] inputs)
     {
         // if (inputs.Length != _weights[0].Length) throw new ArgumentException("Input lengths don't match");
         

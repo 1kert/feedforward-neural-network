@@ -11,14 +11,14 @@ public class Network
             _layers[i - 1] = new Layer(layers[i - 1], layers[i]);
     }
 
-    public double[] Evaluate(double[] inputs)
+    public double[] Calculate(double[] inputs)
     {
         // if (inputs.Length != _layers[0].Length) throw new ArgumentException("Input lengths don't match");
 
         double[] outputs = inputs;
         foreach (Layer layer in _layers)
         {
-            outputs = layer.Evaluate(outputs);
+            outputs = layer.Calculate(outputs);
         }
         
         return outputs;
@@ -29,7 +29,7 @@ public class Network
         // todo: apply gradients during backpropagation
         foreach (var layer in _layers) layer.ClearGradients();
         
-        double[] outputs = Evaluate(datapoint.Inputs);
+        double[] outputs = Calculate(datapoint.Inputs);
         double[] chainValues = _layers[^1].CalculateOutputChainValues(datapoint.Expected);
         for (int i = _layers.Length - 1; i >= 0; i--)
         {
