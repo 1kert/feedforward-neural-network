@@ -79,7 +79,7 @@ public class Layer
 
     public double[] CalculateNextChainValues(double[] previousChainValues)
     {
-        double[] chainValues = new double[Length];
+        double[] chainValues = new double[_inputs.Length];
 
         for (int j = 0; j < _inputs.Length; j++)
         {
