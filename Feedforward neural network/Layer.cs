@@ -54,6 +54,10 @@ public class Layer
     
     private static double SigmoidActivationDerivative(double x) => Math.Exp(-x) / (1 + Math.Exp(-x));
     
+    private static double LReLu(double x) => x > 0 ? x : 0.01 * x;
+    
+    private static double LReLuDerivative(double x) => x > 0 ? 1 : 0.01;
+    
     private static double InitializeWeight(int inputs, int outputs) => 
         Math.Sqrt(6.0 / (inputs + outputs)) * (2 * Random.Shared.NextDouble() - 1);
     
