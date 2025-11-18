@@ -52,7 +52,7 @@ public class Layer
 
     private static double SigmoidActivation(double x) => 1 / (1 + Math.Exp(-x));
     
-    private static double SigmoidActivationDerivative(double x) => Math.Exp(-x) / (1 + Math.Exp(-x));
+    private static double SigmoidActivationDerivative(double x) => Math.Exp(-x) / Math.Pow(1 + Math.Exp(-x), 2);
     
     private static double LReLu(double x) => x > 0 ? x : 0.01 * x;
     
