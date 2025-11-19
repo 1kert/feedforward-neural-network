@@ -51,4 +51,6 @@ public class Network
         double cost = Layer.Cost(datapoint.Expected, outputs);
         return cost;
     }
+
+    public double Cost(Datapoint[] dataPoints) => dataPoints.Sum(Cost);
 }
