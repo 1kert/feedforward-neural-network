@@ -4,12 +4,18 @@ class Program
 {
     static void Main(string[] args)
     {
-        Network network = new(2, 8, 8, 4, 2); // todo: fix
+        Network network = new(1, 4, 2);
         Datapoint[] dataPoints =
         [
-            new([0.2, 0.3], [1, 0]),
-            new([0.3, 0.4], [0.5, 0.5]),
-            new([0.4, 0.5], [0, 0])
+            new([0.6], [1, 0]),
+            new([0.7], [1, 0]),
+            new([0.8], [1, 0]),
+            new([0.9], [1, 0]),
+            new([0.54], [1, 0]),
+            new([0.2], [0, 1]),
+            new([0], [0, 1]),
+            new([0.48], [0, 1]),
+            new([0.10], [0, 1])
         ];
         
         const double learningRate = 0.02;
@@ -20,14 +26,15 @@ class Program
             {
                 network.Learn(datapoint, learningRate);
             }
-
+        
             // double[] output = network.Calculate(datapoint.Inputs);
             // network.Learn(datapoint, 0.2);
         }
         
         foreach (Datapoint datapoint in dataPoints)
         {
-            Console.WriteLine($"[{string.Join(", ", network.Calculate(datapoint.Inputs))}]");
+            var outputs = network.Calculate(datapoint.Inputs).Select(x => Math.Round(x, 2));
+            Console.WriteLine($"[{string.Join(", ", datapoint.Inputs)}]: [{string.Join(", ", outputs)}]");
         }
     }
 }

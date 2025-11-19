@@ -44,4 +44,11 @@ public class Network
         
         foreach (var layer in _layers) layer.ApplyGradients(learningRate);
     }
+
+    public double Cost(Datapoint datapoint)
+    {
+        double[] outputs = Calculate(datapoint.Inputs);
+        double cost = Layer.Cost(datapoint.Expected, outputs);
+        return cost;
+    }
 }
