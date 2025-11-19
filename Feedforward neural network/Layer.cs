@@ -66,7 +66,7 @@ public class Layer
     public static double Cost(double[] expected, double[] actual)
     {
         double totalCost = 0;
-        for(int i = 0; i< expected.Length; i++) totalCost += Cost(expected[i], actual[i]);
+        for(int i = 0; i < expected.Length; i++) totalCost += Cost(expected[i], actual[i]);
         return totalCost;
     }
     
@@ -77,7 +77,7 @@ public class Layer
         for (int i = 0; i < Length; i++)
         {
             _biasGradient[i] = 0.0;
-            for(int j = 0; j < _weights[i].Length; j++) _weights[i][j] = 0.0;
+            for(int j = 0; j < _weights[i].Length; j++) _weightGradient[i][j] = 0.0;
         }
     }
 
