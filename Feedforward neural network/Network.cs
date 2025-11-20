@@ -13,8 +13,6 @@ public class Network
 
     public double[] Calculate(double[] inputs)
     {
-        // if (inputs.Length != _layers[0].Length) throw new ArgumentException("Input lengths don't match");
-
         double[] outputs = new double[inputs.Length];
         Array.Copy(inputs, outputs, inputs.Length);
         foreach (Layer layer in _layers)

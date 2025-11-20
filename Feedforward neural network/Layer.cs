@@ -33,8 +33,6 @@ public class Layer
 
     public double[] Calculate(double[] inputs)
     {
-        // if (inputs.Length != _weights[0].Length) throw new ArgumentException("Input lengths don't match");
-        
         _inputs = inputs;
         double[] sums = new double[Length];
         for (int i = 0; i < Length; i++)
