@@ -108,20 +108,20 @@ public class Layer
     {
         for (int i = 0; i < Length; i++)
         {
-            _biasGradient[i] = chainValues[i];
+            _biasGradient[i] += chainValues[i];
             for (int j = 0; j < _weights[i].Length; j++)
-                _weightGradient[i][j] = _inputs[j] * chainValues[i];
+                _weightGradient[i][j] += _inputs[j] * chainValues[i];
         }
     }
 
-    public void ApplyGradients(double learningRate)
+    public void ApplyGradients(double learningRate, int samples)
     {
         for (int i = 0; i < Length; i++)
         {
-            _biases[i] += learningRate * _biasGradient[i];
+            _biases[i] += learningRate * _biasGradient[i] / samples;
             
             for (int j = 0; j < _weights[i].Length; j++)
-                _weights[i][j] += learningRate * _weightGradient[i][j];
+                _weights[i][j] += learningRate * _weightGradient[i][j] / samples;
         }
     }
 }

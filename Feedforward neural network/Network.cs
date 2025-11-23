@@ -23,21 +23,25 @@ public class Network
         return outputs;
     }
 
-    public void Learn(Datapoint datapoint, double learningRate)
+    // todo: use ICollection for others
+    public void Learn(ICollection<Datapoint> dataPoints, double learningRate)
     {
         // todo: impl batch learning
         foreach (var layer in _layers) layer.ClearGradients();
         
-        Calculate(datapoint.Inputs);
-        double[] chainValues = _layers[^1].CalculateOutputChainValues(datapoint.Expected);
-        for (int i = _layers.Length - 1; i >= 0; i--)
+        foreach (var datapoint in dataPoints)
         {
-            if (i != _layers.Length - 1)
-                chainValues = _layers[i + 1].CalculateNextChainValues(chainValues);
-            _layers[i].CalculateGradients(chainValues);
+            Calculate(datapoint.Inputs);
+            double[] chainValues = _layers[^1].CalculateOutputChainValues(datapoint.Expected);
+            for (int i = _layers.Length - 1; i >= 0; i--)
+            {
+                if (i != _layers.Length - 1)
+                    chainValues = _layers[i + 1].CalculateNextChainValues(chainValues);
+                _layers[i].CalculateGradients(chainValues);
+            }
         }
         
-        foreach (var layer in _layers) layer.ApplyGradients(learningRate);
+        foreach (var layer in _layers) layer.ApplyGradients(learningRate, dataPoints.Count);
     }
 
     public double Cost(Datapoint datapoint)
