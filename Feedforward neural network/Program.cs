@@ -25,7 +25,8 @@ class Program
     
     static void Main()
     {
-        const double learningRate = 0.02;
+        const double learningRate = 0.04;
+        const int batchSize = 4;
         
         Network network = new(1, 4, 4, 4, 2);
         Datapoint[] dataPoints =
@@ -42,14 +43,22 @@ class Program
             new([0.10], [0, 1])
         ];
 
+        int count = 0;
         while (true)
         {
-            foreach (Datapoint datapoint in dataPoints)
+            count++;
+            var batches = DivideToBatches(dataPoints, batchSize);
+
+            foreach (var batch in batches)
+                network.Learn(batch, learningRate);
+
+            var cost = network.Cost(dataPoints);
+            if (count == 1000)
             {
-                network.Learn([datapoint], learningRate);
+                count = 0;
+                Console.WriteLine($"cost: {cost}");
             }
-            
-            if (network.Cost(dataPoints) <= 0.001) break;
+            if (cost <= 0.001) break;
         }
         
         foreach (Datapoint datapoint in dataPoints)
