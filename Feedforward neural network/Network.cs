@@ -23,8 +23,7 @@ public class Network
         return outputs;
     }
 
-    // todo: use ICollection for others
-    public void Learn(ICollection<Datapoint> dataPoints, double learningRate)
+    public void Learn(Datapoint[] dataPoints, double learningRate)
     {
         // todo: impl batch learning
         foreach (var layer in _layers) layer.ClearGradients();
@@ -41,7 +40,7 @@ public class Network
             }
         }
         
-        foreach (var layer in _layers) layer.ApplyGradients(learningRate, dataPoints.Count);
+        foreach (var layer in _layers) layer.ApplyGradients(learningRate, dataPoints.Length);
     }
 
     public double Cost(Datapoint datapoint)
