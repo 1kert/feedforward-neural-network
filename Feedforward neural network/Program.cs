@@ -2,8 +2,31 @@
 
 class Program
 {
+    static Datapoint[][] DivideToBatches(Datapoint[] dataPoints, int batchSize)
+    {
+        var copy = new Datapoint[dataPoints.Length];
+        Array.Copy(dataPoints, copy, dataPoints.Length);
+        Random.Shared.Shuffle(copy);
+        var batch = new Datapoint[batchSize];
+        List<Datapoint[]> batches = [];
+        for (int i = 0; i < dataPoints.Length; i++)
+        {
+            if (i != 0 && i % batchSize == 0)
+            {
+                batches.Add(batch);
+                batch = new Datapoint[batchSize];
+            }
+            
+            batch[i % batchSize] = copy[i];
+        }
+
+        return batches.ToArray();
+    }
+    
     static void Main()
     {
+        const double learningRate = 0.02;
+        
         Network network = new(1, 4, 4, 4, 2);
         Datapoint[] dataPoints =
         [
@@ -18,14 +41,12 @@ class Program
             new([0.48], [0, 1]),
             new([0.10], [0, 1])
         ];
-        
-        const double learningRate = 0.02;
 
         while (true)
         {
             foreach (Datapoint datapoint in dataPoints)
             {
-                network.Learn(datapoint, learningRate);
+                network.Learn([datapoint], learningRate);
             }
             
             if (network.Cost(dataPoints) <= 0.001) break;
