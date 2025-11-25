@@ -42,7 +42,7 @@ public class Layer
                 sums[i] += _weights[i][j] * inputs[j];
             
             _sums[i] = sums[i];
-            sums[i] = SigmoidActivation(sums[i]);
+            sums[i] = LReLu(sums[i]);
             _activations[i] = sums[i];
         }
         return sums;
@@ -90,7 +90,7 @@ public class Layer
             for (int i = 0; i < Length; i++)
                  chainValues[j] += _weights[i][j] * previousChainValues[i];
             
-            chainValues[j] *= SigmoidActivationDerivative(_inputs[j]);
+            chainValues[j] *= LReLuDerivative(_inputs[j]);
         }
         
         return chainValues;
@@ -100,7 +100,7 @@ public class Layer
     {
         double[] chainValues = new double[Length];
         for (int i = 0; i < Length; i++)
-            chainValues[i] = CostDerivative(expected[i], _activations[i]) * SigmoidActivationDerivative(_sums[i]);
+            chainValues[i] = CostDerivative(expected[i], _activations[i]) * LReLuDerivative(_sums[i]);
         return chainValues;
     }
 
